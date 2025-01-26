@@ -36,32 +36,50 @@ class Warrior(Character):
    @property
    def CRIT(self)->float:
       return 0
-'''   
-class Mage(Character):
    
-   def __init__():
-      def __init__(self, name:str, lvl:int, xp:int, hp:int):
-        self.class_name = "Mage"
+class Mage(Character):
 
-        super().__init__(name, lvl, xp)
+   def __init__(self, name:str, lvl:int = 1, xp:int = 0, hp:int = None):
+      self.class_name = "Mage"
 
-        self.max_HP = 300 + lvl*55
-        self.HP = min(hp,self.max_HP)
-        self.ad = 45 + lvl*3
-        self.ar = 50 + lvl*1.5
-        self.mr = 30 + lvl*2
-        self.crit =  lvl*0.75
+      super().__init__(name, lvl, xp)
 
-        self.lifeBar = LifeBar(self)
-'''
+      self.HP = self.startHp(hp)
+      self.lifeBar = LifeBar(self)
+
+   @property
+   def max_HP(self)->int:
+      return 300 + self.lvl*55
+         
+   def startHp(self, hp)->int:
+      if hp == None:
+         return self.max_HP
+      else:
+         return min(hp,self.max_HP)
+        
+   @property
+   def AD(self)->int:
+      return round(50 + self.lvl*2.5)
+         
+   @property
+   def AR(self)->int:
+      return round(48 + self.lvl*2.5)
+         
+   @property
+   def MR(self)->int:
+      return 40 + self.lvl*2
+         
+   @property
+   def CRIT(self)->float:
+      return 0
 
 if __name__ == '__main__':
-   Garen = Warrior('Garen')
-   Darius = Warrior('Darius')
+   Garen = Warrior('Garen',20)
+   Ryze = Mage('Ryze',20)
 
    os.system('cls')
 
-   print(Darius.lifeBar)
+   print(Ryze.lifeBar)
    print(Garen.lifeBar)
    time.sleep(1)
 
@@ -70,21 +88,20 @@ if __name__ == '__main__':
    time.sleep(1)
    os.system('cls')
 
-   while Garen.HP > 0 and Darius.HP > 0:
+   while Garen.HP > 0 and Ryze.HP > 0:
 
-      Darius.autoAttack(Garen)
+      Ryze.autoAttack(Garen)
       Garen.lifeBar.update(Garen)
 
-      print(Darius.lifeBar)
+      print(Ryze.lifeBar)
       print(Garen.lifeBar)
 
       time.sleep(1)
       os.system('cls')
 
-      Garen.autoAttack(Darius)
-      Darius.lifeBar.update(Darius)
+      Garen.autoAttack(Ryze)
 
-      print(Darius.lifeBar)
+      print(Ryze.lifeBar)
       print(Garen.lifeBar)
 
       time.sleep(1)
