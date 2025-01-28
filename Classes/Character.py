@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from LifeBar import LifeBar
 
 class Character(ABC):
   
@@ -8,7 +7,7 @@ class Character(ABC):
     self.lvl    = max(lvl,1)
     self.max_xp = 1000 * lvl
     self.xp     = xp
-    
+    self.items  = list() 
 
     @property
     @abstractmethod
@@ -57,6 +56,22 @@ class Character(ABC):
       self.lvlUp()
 
   def autoAttack(self,target):
-    damage_reduction = 100/(100+self.AR)
-    damage = self.AD*damage_reduction
+    for item in self.items:
+       if item.onHit:
+          item.onHit(self, target)
+
+    damage = self.AD * 100/(100+target.AR)
     target.HP = max(round(target.HP - damage), 0)
+    target.lifeBar.update(target)
+
+  def qSpell(self, entity = None):
+        pass
+
+  def wSpell(self, entity = None):
+        pass
+
+  def eSpell(self, entity = None):
+        pass
+
+  def rSpell(self, entity = None):
+        pass
