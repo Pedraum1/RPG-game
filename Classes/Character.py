@@ -7,46 +7,23 @@ class Character(ABC):
     self.lvl    = max(lvl,1)
     self.max_xp = 1000 * lvl
     self.xp     = xp
-    self.items  = list() 
+    self.items  = list()
 
-    @property
-    @abstractmethod
-    def max_HP(self)->int:
+    self.max_hp = 0
+    self.hp = 0
+    self.ar = 0
+    self.mr = 0
+    self.ad = 0
+    self.ap = 0
+    self.crit = 0
+  
+  def setupStatus(self):
       pass
-    
-    @abstractmethod
-    def startHp(self)->int:
-      pass
-    
-    @property
-    @abstractmethod
-    def AR(self)->int:
-      pass
-    
-    @property
-    @abstractmethod
-    def MR(self)->int:
-      pass
-    
-    @property
-    @abstractmethod
-    def AD(self)->int:
-      pass
-
-    @property
-    @abstractmethod
-    def AP(self)->int:
-      pass
-
-    @property
-    @abstractmethod
-    def CRIT(self)->float:
-      pass
-
   
   def lvlUp(self):
      self.lvl = min(self.lvl+1,20)
      self.max_xp = 1000 * self.lvl
+     setupStatus(self)
 
   def gainXp(self, xp_reward):
     self.xp += xp_reward
@@ -60,8 +37,8 @@ class Character(ABC):
        if item.onHit:
           item.onHit(self, target)
 
-    damage = self.AD * 100/(100+target.AR)
-    target.HP = max(round(target.HP - damage), 0)
+    damage = self.ad * 100/(100+target.ar)
+    target.hp = max(round(target.hp - damage), 0)
     target.lifeBar.update(target)
 
   def qSpell(self, entity = None):
