@@ -1,5 +1,6 @@
-from Character import Character
-from LifeBar import LifeBar
+from .Character import Character
+from .LifeBar import LifeBar
+from .Items import *
 
 import time, os
 
@@ -72,38 +73,3 @@ class Mage(Character):
    @property
    def CRIT(self)->float:
       return 0
-
-if __name__ == '__main__':
-   Garen = Warrior('Garen',20)
-   Ryze = Mage('Ryze',20)
-
-   os.system('cls')
-
-   print(Ryze.lifeBar)
-   print(Garen.lifeBar)
-   time.sleep(1)
-
-   print('begin X1')
-
-   time.sleep(1)
-   os.system('cls')
-
-   while Garen.HP > 0 and Ryze.HP > 0:
-
-      Ryze.autoAttack(Garen)
-      Garen.lifeBar.update(Garen)
-
-      print(Ryze.lifeBar)
-      print(Garen.lifeBar)
-
-      time.sleep(1)
-      os.system('cls')
-
-      Garen.autoAttack(Ryze)
-
-      print(Ryze.lifeBar)
-      print(Garen.lifeBar)
-
-      time.sleep(1)
-      os.system('cls')
-
