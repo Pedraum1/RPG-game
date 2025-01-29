@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..Functions.gameplay import percent
+from Functions.gameplay import percent
 
 class Item(ABC):
     def __init__(self, HP:int = 0, AD:int = 0, AP:int = 0, AR:int = 0, MR:int = 0, CRIT:float = 0):
@@ -34,3 +34,6 @@ class BlackCleaver(Item):
     def resetEffects(self, target=None):
         self.target_armor = 0
         self.counter = 0
+
+    def effect(self, target = None):
+        pass
