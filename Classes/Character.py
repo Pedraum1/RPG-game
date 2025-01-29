@@ -19,9 +19,6 @@ class Character(ABC):
   
   def setupStatus(self):
       pass
-
-    #TODO: CHANGE CHARACTER STATUS TO PROPERTIES AND CREATE ABSTRACT METHODS FOR EACH ROLE
-
   
   def lvlUp(self):
      self.lvl = min(self.lvl+1,20)
@@ -37,18 +34,18 @@ class Character(ABC):
 
   def gainItem(self, item):
     self.items.append(item)
-    self.HP += item.HP
-    self.AR += item.AR
-    self.MR += item.MR
-    self.AD += item.AD
-    self.AP += item.AP
-    self.CRIT += item.CRIT
+    self.hp += item.hp
+    self.ar += item.ar
+    self.mr += item.mr
+    self.ad += item.ad
+    self.ap += item.ap
+    self.crit += item.crit
 
 
   def autoAttack(self,target):
     for item in self.items:
-       if item.onHit:
-          item.onHit(self, target)
+       if item.hasOnHitEffect:
+          item.onHit(target)
 
     damage = self.ad * calculateReduction(target.ar)
     target.hp = max(round(target.hp - damage), 0)
