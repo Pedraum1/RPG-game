@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+from Functions.gameplay import calculateReduction
 class Character(ABC):
   
   def __init__(self, name:str, lvl:int = 1, xp:int = 0):
@@ -43,6 +43,8 @@ class Character(ABC):
     def CRIT(self)->float:
       pass
 
+    #TODO: CHANGE CHARACTER STATUS TO PROPERTIES AND CREATE ABSTRACT METHODS FOR EACH ROLE
+
   
   def lvlUp(self):
      self.lvl = min(self.lvl+1,20)
@@ -55,12 +57,22 @@ class Character(ABC):
       self.xp = self.xp - self.max_xp
       self.lvlUp()
 
+  def gainItem(self, item):
+    self.items.append(item)
+    self.HP += item.HP
+    self.AR += item.AR
+    self.MR += item.MR
+    self.AD += item.AD
+    self.AP += item.AP
+    self.CRIT += item.CRIT
+
+
   def autoAttack(self,target):
     for item in self.items:
        if item.onHit:
           item.onHit(self, target)
 
-    damage = self.AD * 100/(100+target.AR)
+    damage = self.AD * calculateReduction(target.AR)
     target.HP = max(round(target.HP - damage), 0)
     target.lifeBar.update(target)
 
