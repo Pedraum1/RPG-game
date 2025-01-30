@@ -1,8 +1,14 @@
 import time, os
 from Classes.Roles import Warrior, Mage
+from Classes.Items import *
+from Functions.inputs import anyKeyPressed 
 
 Garen = Warrior('Garen',20)
 Ryze = Mage('Ryze',20)
+
+item = BlackCleaver()
+
+Garen.gainItem(item)
 
 os.system('cls')
 
@@ -23,7 +29,7 @@ while Garen.hp > 0 and Ryze.hp > 0:
     print(Ryze.lifeBar)
     print(Garen.lifeBar)
 
-    time.sleep(1)
+    anyKeyPressed()
     os.system('cls')
 
     Garen.autoAttack(Ryze)
@@ -31,5 +37,5 @@ while Garen.hp > 0 and Ryze.hp > 0:
     print(Ryze.lifeBar)
     print(Garen.lifeBar)
 
-    time.sleep(1)
+    anyKeyPressed()
     os.system('cls')
