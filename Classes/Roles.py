@@ -1,5 +1,6 @@
 from .Character import Character
 from .LifeBar import LifeBar
+from .Items import *
 
 class Warrior(Character):
     

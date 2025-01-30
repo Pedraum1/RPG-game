@@ -1,15 +1,15 @@
 from abc import ABC, abstractmethod
-from ..Functions.gameplay import percent
+from Functions.gameplay import percent
 
 class Item(ABC):
-    def __init__(self, HP:int = 0, AD:int = 0, AP:int = 0, AR:int = 0, MR:int = 0, CRIT:float = 0):
-        self.HP   = HP
-        self.AD   = AD
-        self.AP   = AP
-        self.AR   = AR
-        self.MR   = MR
-        self.CRIT = CRIT
-        self.onHit = False
+    def __init__(self, hp:int = 0, ad:int = 0, ap:int = 0, ar:int = 0, mr:int = 0, crit:float = 0):
+        self.hp   = hp
+        self.ad   = ad
+        self.ap   = ap
+        self.ar   = ar
+        self.mr   = mr
+        self.crit = crit
+        self.hasOnHitEffect = False
 
     @abstractmethod
     def effect(self, target = None):
@@ -21,16 +21,21 @@ class Item(ABC):
 class BlackCleaver(Item):
     def __init__(self):
         super().__init__(400, 40)
-        self.onHit = True
         self.counter = 0
-        self.target_armor = 0
+        self.target_armor = None
+        self.hasOnHitEffect = True
 
     def onHit(self, target):
-        if self.target_armor == 0:
-            self.target_armor = target.AR
-        target.AR = round(self.target_armor - percent(6)*self.target_armor*self.counter, 0)
+        if self.target_armor == None:
+            self.target_armor = target.ar
         self.counter = min(6,self.counter+1)
+        target.ar = round(self.target_armor - percent(6,self.target_armor)*self.counter, 0)
 
     def resetEffects(self, target=None):
         self.target_armor = 0
         self.counter = 0
+
+        target.ar = self.target_armor
+
+    def effect(self, target = None):
+        pass
