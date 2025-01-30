@@ -1,8 +1,6 @@
 from .Character import Character
 from .LifeBar import LifeBar
 
-import time, os
-
 class Warrior(Character):
     
    def __init__(self, name:str, lvl:int = 1, xp:int = 0, hp:int = None):
