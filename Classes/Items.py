@@ -10,6 +10,7 @@ class Item(ABC):
         self.mr   = mr
         self.crit = crit
         self.hasOnHitEffect = False
+        self.name = None
 
     @abstractmethod
     def effect(self, target = None):
@@ -21,6 +22,7 @@ class Item(ABC):
 class BlackCleaver(Item):
     def __init__(self):
         super().__init__(400, 40)
+        self.name = 'Black Cleaver'
         self.counter = 0
         self.target_armor = None
         self.hasOnHitEffect = True
