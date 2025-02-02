@@ -7,7 +7,7 @@ class Game():
 
     def menu(self) -> int:
         menu_options = ['New Game', 'Settings', 'Exit']
-        return printOptions(menu_options)
+        return printOptions(menu_options,"PYTHON RPG")
     
     def start():
         pass
