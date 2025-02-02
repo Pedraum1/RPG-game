@@ -1,4 +1,4 @@
-from Prompt import clearPrompt
+from .Prompt import clearPrompt
 
 def anyKeyPressed():
     while True:
@@ -12,7 +12,10 @@ def printOptions(options:list, text:str="") -> int:
         print(f"{text}\n")
         for index, option in enumerate(options):            
             print(f"{index+1} - {option}")
+        print(f"{len(options)+1} - Exit")
+
         option = getNumberOption(options)
+
         if option != None:
             return option
         
@@ -21,8 +24,8 @@ def printOptions(options:list, text:str="") -> int:
 def getNumberOption(options:list):
     while True:
         try:
-            option = int(input("Enter the number of the option: "))-1
-            if option < 0 or option > len(options)-1:
+            option = int(input("\nEnter the number of the option: "))-1
+            if option < 0 or option > len(options):
                 print("Invalid option")
                 return None
             return option
