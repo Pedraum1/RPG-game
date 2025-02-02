@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from Functions.gameplay import calculateReduction
 class Character(ABC):
   
@@ -7,7 +7,7 @@ class Character(ABC):
     self.lvl    = max(lvl,1)
     self.max_xp = 1000 * lvl
     self.xp     = xp
-    self.items  = list()
+    self.items  = dict()
 
     self.max_hp = 0
     self.hp = 0
@@ -33,7 +33,7 @@ class Character(ABC):
       self.lvlUp()
 
   def gainItem(self, item):
-    self.items.append(item)
+    self.items[item.name] = item
     self.hp += item.hp
     self.ar += item.ar
     self.mr += item.mr
@@ -41,6 +41,16 @@ class Character(ABC):
     self.ap += item.ap
     self.crit += item.crit
 
+  def removeItem(self, item_name):
+      item = self.items[item_name]
+      self.items.pop('item_name')
+      self.hp -= item.hp
+      self.ar -= item.ar
+      self.mr -= item.mr
+      self.ad -= item.ad
+      self.ap -= item.ap
+      self.crit -= item.crit
+      
 
   def autoAttack(self,target):
     for item in self.items:
