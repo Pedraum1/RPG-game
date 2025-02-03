@@ -11,7 +11,7 @@ class Warrior(Character):
 
       self.max_hp = 500 + self.lvl*85
       self.hp     = self.startHp(hp)
-      self.ad     = 70 + self.lvl*4
+      self.ad     = 65 + self.lvl*3.5
       self.ar     = 60 + self.lvl*4
       self.mr     = 60 + self.lvl*4
 
@@ -19,7 +19,7 @@ class Warrior(Character):
 
    def setupStatus(self):
       self.max_hp = 500 + self.lvl*85
-      self.ad = 70 + self.lvl*4
+      self.ad = 70 + self.lvl*3.5
       self.ar = 60 + self.lvl*4
       self.mr = 60 + self.lvl*4
    
@@ -36,7 +36,7 @@ class Mage(Character):
 
       super().__init__(name, lvl, xp)
 
-      self.max_hp = 300 + self.lvl*55
+      self.max_hp = 300 + self.lvl*50
       self.hp     = self.startHp(hp)
       self.ad     = 50 + self.lvl*2.5
       self.ar     = 40 + self.lvl*2.5
@@ -45,7 +45,7 @@ class Mage(Character):
       self.lifeBar = LifeBar(self)
 
    def setupStatus(self):
-      self.max_hp = 300 + self.lvl*55
+      self.max_hp = 300 + self.lvl*50
       self.ad = 50 + self.lvl*2.5
       self.ar = 40 + self.lvl*2.5
       self.mr = 40 + self.lvl*2
