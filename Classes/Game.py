@@ -3,9 +3,9 @@ from Functions.Prompt import *
 
 class Game():
     def __init__(self):
-        self.difficulty = "Easy"
         self.difficulty_level = 0
         self.difficulty_levels = ["Easy","Medium","Hard"]
+        self.difficulty = self.difficulty_levels[self.difficulty_level]
 
     def menu(self) -> int:
         clearPrompt()
@@ -14,6 +14,7 @@ class Game():
     
     def run(self) -> None:
         while True:
+            clearPrompt()
             print("Imagine the game running ...")
             anyKeyPressed()
             clearPrompt()
