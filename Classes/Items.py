@@ -10,11 +10,8 @@ class Item(ABC):
         self.mr   = mr
         self.crit = crit
         self.hasOnHitEffect = False
+        self.hasOnHitOnEnemyEffect = False
         self.name = None
-
-    @abstractmethod
-    def effect(self, target = None):
-        pass
 
     def resetEffects(self,target = None):
         pass
@@ -39,5 +36,12 @@ class BlackCleaver(Item):
 
         target.ar = self.target_armor
 
-    def effect(self, target = None):
-        pass
+
+class Thornmail(Item):
+    def __init__(self):
+        super().__init__(150, ar=75)
+        self.name = 'Thornmail'
+        self.hasOnHitOnEnemyEffect = True
+
+    def onHitOnEnemy(self, owner, target):
+        target.hp -= max(round(20 + percent(10, owner.ar)), 0)
