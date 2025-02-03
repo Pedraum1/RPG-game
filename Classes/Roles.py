@@ -56,3 +56,32 @@ class Mage(Character):
       else:
          return min(hp,self.max_hp)
 
+class Assassin(Character):
+   
+   def __init__(self, name:str, lvl:int = 1, xp:int = 0, hp:int = None):
+      self.class_name = "Assassin"
+
+      super().__init__(name, lvl, xp)
+
+      self.max_hp = 450 + self.lvl*55
+      self.hp     = self.startHp(hp)
+      self.ad     = 90 + self.lvl*2.75
+      self.ar     = 35 + self.lvl*2.25
+      self.mr     = 30 + self.lvl*1.5
+
+      self.lifeBar = LifeBar(self)
+
+   def setupStatus(self):
+      hp_proportion = self.hp/self.max_hp
+      self.max_hp = 450 + self.lvl*55
+      self.hp = self.max_hp*hp_proportion
+
+      self.ad = 90 + self.lvl*2.75
+      self.ar = 35 + self.lvl*2.25
+      self.mr = 30 + self.lvl*1.5
+         
+   def startHp(self, hp)->int:
+      if hp == None:
+         return self.max_hp
+      else:
+         return min(hp,self.max_hp)
