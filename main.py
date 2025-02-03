@@ -1,19 +1,23 @@
 import time, os
-from Classes.Roles import Warrior, Mage
+from Classes.Roles import Assassin, Warrior
 from Classes.Items import *
 from Functions.inputs import anyKeyPressed 
 
-Garen = Warrior('Garen',20)
-Ryze = Mage('Ryze',20)
+Zed = Assassin('Zed',3)
+Garen = Warrior('Garen',3)
 
-item = BlackCleaver()
+item1 = BlackCleaver()
+#item2 = BlackCleaver()
+item3 = Thornmail()
 
-Garen.gainItem(item)
+Zed.gainItem(item1)
+#Garen.gainItem(item2)
+Garen.gainItem(item3)
 
 os.system('cls')
 
-print(Ryze.lifeBar)
 print(Garen.lifeBar)
+print(Zed.lifeBar)
 time.sleep(1)
 
 print('begin X1')
@@ -21,21 +25,20 @@ print('begin X1')
 time.sleep(1)
 os.system('cls')
 
-while Garen.hp > 0 and Ryze.hp > 0:
+while Zed.hp > 0 and Garen.hp > 0:
 
-    Ryze.autoAttack(Garen)
-    Garen.lifeBar.update(Garen)
-
-    print(Ryze.lifeBar)
     print(Garen.lifeBar)
+    print(Zed.lifeBar)
+    Zed.autoAttack(Garen)
+    Garen.lifeBar.update(Garen)
 
     anyKeyPressed()
     os.system('cls')
 
-    Garen.autoAttack(Ryze)
-
-    print(Ryze.lifeBar)
     print(Garen.lifeBar)
+    print(Zed.lifeBar)
+    Garen.autoAttack(Zed)
+    Zed.lifeBar.update(Zed)
 
     anyKeyPressed()
     os.system('cls')
