@@ -57,9 +57,15 @@ class Character(ABC):
 
     damage = self.ad * calculateReduction(target.ar)
     target.hp = max(round(target.hp - damage), 0)
+    print(f"{target.name} has been hit for {damage:.0f} damage")
+    
     for item in self.items.values():
        if item.hasOnHitEffect:
           item.onHit(target)
+
+    for item in target.items.values():
+        if item.hasOnHitOnEnemyEffect:
+            item.onHitOnEnemy(target, self)
 
   def qSpell(self, entity = None):
         pass
