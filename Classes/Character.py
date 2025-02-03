@@ -34,6 +34,7 @@ class Character(ABC):
 
   def gainItem(self, item):
     self.items[item.name] = item
+    self.max_hp += item.hp
     self.hp += item.hp
     self.ar += item.ar
     self.mr += item.mr
@@ -53,13 +54,12 @@ class Character(ABC):
       
 
   def autoAttack(self,target):
-    for item in self.items:
-       if item.hasOnHitEffect:
-          item.onHit(target)
 
     damage = self.ad * calculateReduction(target.ar)
     target.hp = max(round(target.hp - damage), 0)
-    target.lifeBar.update(target)
+    for item in self.items.values():
+       if item.hasOnHitEffect:
+          item.onHit(target)
 
   def qSpell(self, entity = None):
         pass
