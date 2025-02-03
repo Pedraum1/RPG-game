@@ -9,7 +9,7 @@ class LifeBar:
     life      = round(self.entity.hp*self.length/self.entity.max_hp)
     lost_life = self.length - life
 
-    return f"{self.entity.name} - {self.entity.class_name} - lvl.{self.entity.lvl}\n|{life*self.square}{lost_life*'_'}|\n"
+    return f"{self.entity.name} - {self.entity.max_hp}/{self.entity.hp} - {self.entity.class_name} - lvl.{self.entity.lvl}\n|{life*self.square}{lost_life*'_'}|\n"
   
   def update(self,target):
     self.entity = target
