@@ -54,10 +54,7 @@ class Character(ABC):
       
 
   def autoAttack(self,target):
-
-    damage = self.ad * calculateReduction(target.ar)
-    target.hp = max(round(target.hp - damage), 0)
-    print(f"{target.name} has been hit for {damage:.0f} damage")
+    target.receiveDamage(self.ad)
     
     for item in self.items.values():
        if item.hasOnHitEffect:
@@ -66,6 +63,10 @@ class Character(ABC):
     for item in target.items.values():
         if item.hasOnHitOnEnemyEffect:
             item.onHitOnEnemy(target, self)
+
+  def receiveDamage(self, damage):
+    self.hp = max(int(self.hp - damage*calculateReduction(self.ar)), 0)
+    print(f"{self.name} has been hit for {damage:.0f} damage")
 
   def qSpell(self, entity = None):
         pass
