@@ -85,3 +85,30 @@ class Assassin(Character):
          return self.max_hp
       else:
          return min(hp,self.max_hp)
+      
+class Tank(Character):
+   
+   def __init__(self, name:str, lvl:int = 1, xp:int = 0, hp:int = None):
+      self.class_name = "Tank"
+
+      super().__init__(name, lvl, xp)
+
+      self.max_hp = 650 + self.lvl*100
+      self.hp     = self.startHp(hp)
+      self.ad     = 50 + self.lvl*2.5
+      self.ar     = 70 + self.lvl*4
+      self.mr     = 70 + self.lvl*4
+
+      self.lifeBar = LifeBar(self)
+
+   def setupStatus(self):
+      self.max_hp = 600 + self.lvl*100
+      self.ad = 50 + self.lvl*2.5
+      self.ar = 70 + self.lvl*4
+      self.mr = 70 + self.lvl*4
+         
+   def startHp(self, hp)->int:
+      if hp == None:
+         return self.max_hp
+      else:
+         return min(hp,self.max_hp)
