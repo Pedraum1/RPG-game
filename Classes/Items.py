@@ -44,4 +44,4 @@ class Thornmail(Item):
         self.hasOnHitOnEnemyEffect = True
 
     def onHitOnEnemy(self, owner, target):
-        target.hp -= max(round(20 + percent(10, owner.ar)), 0)
+        target.receiveDamage(10 + percent(6, owner.ar))
